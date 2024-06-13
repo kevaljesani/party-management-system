@@ -1,0 +1,13 @@
+<!-- src/app/party-dialog/party-dialog.component.html -->
+<h1 mat-dialog-title>Party Details</h1>
+<div mat-dialog-content>
+  <p><strong>ID:</strong> {{data.id}}</p>
+  <p><strong>Name:</strong> {{data.name}}</p>
+  <p><strong>Company Name:</strong> {{data.company_name}}</p>
+  <p><strong>Email:</strong> {{data.email}}</p>
+  <p><strong>Mobile No:</strong> {{data.mobile_no}}</p>
+  <!-- Add more fields as necessary -->
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Close</button>
+</div>

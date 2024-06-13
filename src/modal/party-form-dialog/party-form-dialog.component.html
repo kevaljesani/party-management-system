@@ -1,0 +1,184 @@
+<div class="modal-overlay" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="form-dialog">
+      <form [formGroup]="partyForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <h1>Create Party</h1>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" formControlName="name" placeholder="Enter name" />
+            <div
+              *ngIf="partyForm.controls['name'].invalid && (partyForm.controls['name'].dirty || partyForm.controls['name'].touched)">
+              <div class="error-message">Name is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="company_name">Company Name</label>
+            <input type="text" id="company_name" formControlName="company_name" placeholder="Enter company name" />
+            <div
+              *ngIf="partyForm.controls['company_name'].invalid && (partyForm.controls['company_name'].dirty || partyForm.controls['company_name'].touched)">
+              <div class="error-message">Company Name is required</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mobile_no">Mobile No</label>
+            <input type="number" id="mobile_no" formControlName="mobile_no" placeholder="Enter mobile number" />
+            <div
+              *ngIf="partyForm.controls['mobile_no'].invalid && (partyForm.controls['mobile_no'].dirty || partyForm.controls['mobile_no'].touched)">
+              <div class="error-message">Invalid Mobile No</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telephone_no">Telephone No</label>
+            <input type="number" id="telephone_no" formControlName="telephone_no"
+              placeholder="Enter Telephone number" />
+            <div
+              *ngIf="partyForm.controls['telephone_no'].invalid && (partyForm.controls['telephone_no'].dirty || partyForm.controls['telephone_no'].touched)">
+              <div class="error-message">Invalid Telephone No</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="whatsapp_no">Whatsapp No</label>
+            <input type="number" id="whatsapp_no" formControlName="whatsapp_no" placeholder="Enter whatsapp number" />
+            <div
+              *ngIf="partyForm.controls['whatsapp_no'].invalid && (partyForm.controls['whatsapp_no'].dirty || partyForm.controls['whatsapp_no'].touched)">
+              <div class="error-message">Invalid Whatsapp No</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" placeholder="Enter Email" />
+            <div
+              *ngIf="partyForm.controls['email'].invalid && (partyForm.controls['email'].dirty || partyForm.controls['email'].touched)">
+              <div class="error-message">Invalid Email</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="remark">Remark</label>
+            <input type="text" id="remark" formControlName="remark" placeholder="Enter remark" />
+          </div>
+
+          <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" formControlName="date_of_birth" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="anniversary_date">Anniversary Date</label>
+            <input type="date" id="anniversary_date" formControlName="anniversary_date" />
+          </div>
+
+          <div class="form-group">
+            <label for="gstin">GSTIN</label>
+            <input type="text" id="gstin" formControlName="gstin" placeholder="Enter GSTIN" />
+          </div>
+        </div>
+
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pan_no">PAN No</label>
+            <input type="text" id="pan_no" formControlName="pan_no" placeholder="Enter PAN No" />
+          </div>
+
+          <div class="form-group">
+            <label for="credit_limit">Credit Limit</label>
+            <input type="number" id="credit_limit" formControlName="credit_limit" placeholder="Enter Credit Limit" />
+          </div>
+        </div>
+
+        <!-- <div class="form-row"> -->
+        <!-- <div> -->
+        <div   formArrayName="address">
+          <div class="form-group"  *ngFor="let address of addressControls; let i = index" [formGroupName]="i">
+            <h3>Address {{i + 1}}</h3>
+            <div class="form-row">
+              <input style="margin: 5px;" type="text" formControlName="address_line_1" placeholder="Address Line 1" />
+              <input style="margin: 5px;" type="text" formControlName="address_line_2" placeholder="Address Line 2" />
+
+            </div>
+            <div class="form-row">
+              <input style="margin: 5px;" type="text" formControlName="country" placeholder="Country" />
+              <input style="margin: 5px;" type="text" formControlName="state" placeholder="State" />
+
+            </div>
+            <div class="form-row">
+              <input style="margin: 5px;" type="text" formControlName="city" placeholder="City" />
+              <input style="margin: 5px;" type="number" formControlName="pincode" placeholder="Pincode" />
+            </div>
+            <div class="form-row align-center">
+              <div style="width: 50%; display: flex;">
+              <input class="large-checkbox" type="checkbox" formControlName="is_active" /> 
+              <label class="active-label">Active</label>
+            </div>
+              <button class="remove-btn" type="button" (click)="removeAddress(i)">Remove Address</button>
+            </div>
+          </div>
+          <button class="add-section" type="button" (click)="addAddress()">Add Address</button>
+        </div>
+
+        <div  formArrayName="banks">
+          <div class="form-group" *ngFor="let bank of bankControls; let i = index" [formGroupName]="i">
+            <h3>Bank {{i + 1}}</h3>
+            <div class="form-row">
+            <input  style="margin: 5px;" type="text" formControlName="bank_ifsc_code" placeholder="Bank IFSC Code" />
+            <input  style="margin: 5px;" type="text" formControlName="bank_name" placeholder="Bank Name" />
+            </div>
+            <div class="form-row">
+            <input  style="margin: 5px;" type="text" formControlName="branch_name" placeholder="Branch Name" />
+            <input  style="margin: 5px;" type="text" formControlName="account_no" placeholder="Account Number" />
+          </div>
+          <div class="form-row align-center">
+            <input  style="margin: 5px; width: 50%;" type="text" formControlName="account_holder_name" placeholder="Account Holder Name" />
+            <div style="width: 50%; display: flex; margin-left: 10px; justify-content: space-between;">
+            <div style="display: flex;">
+            <input  class="large-checkbox" type="checkbox" formControlName="is_active" />
+            <label class="active-label">Active</label>
+          </div>
+            <div><button class="remove-btn" type="button" (click)="removeBank(i)">Remove Bank</button></div>
+            </div>
+          </div>
+          </div>
+          <button class="add-section" type="button" (click)="addBank()">Add Bank</button>
+        </div>
+
+      <!-- </div> -->
+
+        <div class="form-row" style="width: 86%;">
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" id="image" formControlName="image" (change)="onFileChange($event)" />
+        </div>
+
+        <div class="form-group" style="width: 50%; display: flex; margin-left: 10px; justify-content: space-between;">
+
+          <label class="active-label" for="apply_tds">Apply TDS</label>
+          <input class="large-checkbox" type="checkbox" id="apply_tds" formControlName="apply_tds" />
+        </div>
+        </div>
+       
+
+        <div class="form-actions">
+          <button type="button" (click)="onCancel()">Cancel</button>
+          <button type="submit" [disabled]="!partyForm.valid">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

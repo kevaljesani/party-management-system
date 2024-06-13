@@ -1,0 +1,27 @@
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+      @for(col of tableCol; track col){
+        <th>{{ col }}</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+      @for(party of rowData; track party.id) {
+      <tr>
+        <td>{{ party.id }}</td>
+        <td>{{ party.name }}</td>
+        <td>{{ party.company_name }}</td>
+        <td>{{ party.email }}</td>
+        <td>{{ party.mobile_no }}</td>
+        <td>
+          <button (click)="viewParty(party)">View</button>
+          <button (click)="editParty(party)">Edit</button>
+          <button (click)="deleteParty(party)">Delete</button>
+        </td> 
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

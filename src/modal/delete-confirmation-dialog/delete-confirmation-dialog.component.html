@@ -1,0 +1,9 @@
+<!-- src/app/delete-confirmation-dialog/delete-confirmation-dialog.component.html -->
+<h1 mat-dialog-title>Confirm Delete</h1>
+<div mat-dialog-content>
+  Are you sure you want to delete {{ party.name }}?
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="warn" (click)="onDelete()">Delete</button>
+</div>

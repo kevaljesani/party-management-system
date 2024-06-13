@@ -1,0 +1,54 @@
+<!-- <div class="lg:w-3/12 mt-5 m-5 p-10 shadow-lg mx-auto">
+  <h3 class="text-3xl text-center font-semibold pt-5">Login</h3>
+
+  <form [formGroup]="loginForm" class="flex flex-col">
+      
+      <div class="flex flex-col mt-4 mb-1">
+          <input formControlName="username" class="p-2 border border-gray-300 rounded" type="text"  placeholder="username"/>
+          <span *ngIf="loginForm.hasError('required','username')  && loginForm.controls['username'].dirty" class="text-red-500 ">*username is required</span>
+          <span *ngIf="loginForm.hasError('username','username')"  class="text-red-500 ">*username is not Valid</span>
+      </div>
+     
+      <div class="flex flex-col mt-4 mb-1">
+          <input formControlName="password" class="p-2 border border-gray-300 rounded" type="password"  placeholder="Password"/>
+          <span *ngIf="loginForm.hasError('required','password')  && loginForm.controls['password'].dirty" class="text-red-500 ">*Password is required</span>
+      </div>
+      
+      <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" (click)="login()" class="bg-indigo-600 rounded mt-3 text-white">Login</button>
+  </form>
+</div> -->
+
+
+<div class="container form-container">
+  <div class="form-box">
+    <h2 class="form-title">Login</h2>
+    <form [formGroup]="loginForm" class="login-form">
+      <!-- Email input -->
+      <div class="form-outline">
+        <label class="form-label" for="form2Example1">Email</label>
+        <input formControlName="username" type="text" id="form2Example1" class="form-control input" />
+      </div>
+      <span class="text-danger" *ngIf="loginForm.hasError('required', 'username') && loginForm.controls['username'].dirty">
+        *This field is required
+      </span>
+
+      <!-- Password input -->
+      <div class="form-outline mt-3">
+        <label class="form-label" for="form2Example2">Password</label>
+        <input formControlName="password" type="password" id="form2Example2" class="form-control input" />
+      </div>
+      <span class="text-danger" *ngIf="loginForm.hasError('required', 'password') && loginForm.controls['password'].dirty">
+        *This field is required
+      </span>
+
+      <div>
+        <button type="submit" [disabled]="loginForm.invalid" (click)="login()" class="btn btn-block mt-3 mb-4">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  
+  

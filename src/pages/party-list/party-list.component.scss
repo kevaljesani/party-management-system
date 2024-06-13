@@ -1,0 +1,27 @@
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+// /* set the background color of many elements across the grid */
+// .ag-theme-quartz {
+//   --ag-background-color: #ddd;
+// }
+// /* change the font style of a single UI component */
+// .ag-theme-quartz .ag-header-cell-label {
+//   font-style: italic;
+// }

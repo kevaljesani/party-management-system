@@ -1,8 +1,11 @@
-<div class="modal-overlay" (click)="onCancel()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-overlay form-container" (click)="onCancel()">
+  <div class="modal-content  content-wrapper" (click)="$event.stopPropagation()">
     <div class="form-dialog">
       <form [formGroup]="partyForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-        <h1>Create Party</h1>
+        <div class="title-model">
+          <h1>Create Party</h1>
+          <button class="close-button" (click)="onCancel()">×</button>
+        </div>
 
         <div class="form-row">
           <div class="form-group">

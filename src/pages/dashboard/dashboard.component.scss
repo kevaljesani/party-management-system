@@ -1,4 +1,13 @@
+@import "../../variables";
 
 .custom-backdrop {
     background: rgba(0, 0, 0, 0.5);
+  }
+
+  .party-title{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: $secondcolor;
+    background-color: $primaryColor;
   }

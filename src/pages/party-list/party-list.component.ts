@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { PartyListService } from '../../services/party-list.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule, } from '@angular/material/button';
@@ -10,21 +10,25 @@ import { PartyFormDialogComponent } from '../../modal/party-form-dialog/party-fo
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridReadyEvent } from 'ag-grid-community';
 import "ag-grid-community/styles/ag-grid.css";
-
+import { LoadingService } from '../../services/loader.service';
+import { Router, RouterModule } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
 @Component({
     selector: 'app-party-list',
     standalone: true,
     imports: [MatTableModule,
         MatButtonModule,
-        PartyViewDialogComponent,AgGridAngular],
+        PartyViewDialogComponent,AgGridAngular,MatIconModule],
     templateUrl: './party-list.component.html',
     styleUrl: './party-list.component.scss',
     // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PartyListComponent implements OnInit {
-// rowClassRules: RowClassRules<any>|undefined;
+
+    router = inject(Router);
+
     tableCol : string[] = ['ID','Name','Company Name','Email','Mobile No','Action']
-onGridReady(params: GridReadyEvent) {
+    onGridReady(params: GridReadyEvent) {
     // Your implementation here
     // For example, you might set row data when the grid is ready
     params.api.setRowData(this.rowData);
@@ -33,7 +37,7 @@ onGridReady(params: GridReadyEvent) {
     parties: any[] = [];
     rowData :any[]= [] ;
 
-    constructor(private partyService: PartyListService, public dialog: MatDialog) { }
+    constructor(private partyService: PartyListService,private loadingService:LoadingService, public dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.getAllPartyList();
@@ -53,11 +57,20 @@ onGridReady(params: GridReadyEvent) {
     }
 
     getAllPartyList() {
-        this.partyService.getParties().subscribe((data: any) => {
-            console.log(this.parties, "data")
-            this.datatranform(data)
-        });
+        this.loadingService.show();
+        this.partyService.getParties().subscribe(
+            (response: any) => {
+                    this.datatranform(response);  // Assuming your data is in the body
+                    this.loadingService.hide();
+            },
+            (error: any) => {
+                this.loadingService.hide();
+                this.router.navigate(['/login']);
+               
+            }
+        );
     }
+    
 
     viewParty(party: any): void {
         this.partyService.getPartyById(party.id).subscribe(partyDetails => {

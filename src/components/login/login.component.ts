@@ -31,10 +31,10 @@ export default class LoginComponent {
   login(): void {
     console.log(this.loginForm.value);
     // Uncomment and complete the login logic as needed
-    // this.loadingService.setLoading(true);
+    this.loadingService.show();
     this.authService.loginService(this.loginForm.value).subscribe({
       next: (res) => {
-        // this.loadingService.setLoading(false);
+        this.loadingService.hide();
         alert('Login Success!!');
         console.log("toekn",res.toekn)
         localStorage.setItem('token', res.token);

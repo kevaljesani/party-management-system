@@ -18,7 +18,10 @@
         <td>
           <button (click)="viewParty(party)">View</button>
           <button (click)="editParty(party)">Edit</button>
-          <button (click)="deleteParty(party)">Delete</button>
+          <button mat-fab aria-label="delete icon" (click)="deleteParty(party)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <!-- <button (click)="deleteParty(party)">Delete</button> -->
         </td> 
       </tr>
     }
